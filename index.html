@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nonsensor – Dein Handy ist das Rätsel</title>
+<meta name="description" content="Nonsensor ist ein Rätselspiel für Android, bei dem das Handy selbst das Rätsel ist. Nonsensor is a puzzle game for Android in which the phone itself is the puzzle.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1016" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%23FF6B5E' stroke='%230E1016' stroke-width='5'/%3E%3Cellipse cx='35' cy='44' rx='9' ry='13' fill='%23F4EFE6'/%3E%3Cellipse cx='65' cy='44' rx='9' ry='13' fill='%23F4EFE6'/%3E%3Cellipse cx='36' cy='45' rx='4.5' ry='6' fill='%230E1016'/%3E%3Cellipse cx='66' cy='45' rx='4.5' ry='6' fill='%230E1016'/%3E%3C/svg%3E">
+<style>
+  :root { --ink: #0E1016; --paper: #F4EFE6; --quiet: #555a66; --line: rgba(14, 16, 22, 0.22); --soft: rgba(14, 16, 22, 0.06); --accent: #FF6B5E; }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink: #F4EFE6; --paper: #0E1016; --quiet: #a8acb8; --line: rgba(244, 239, 230, 0.26); --soft: rgba(244, 239, 230, 0.07); }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  main { max-width: 40rem; margin: 0 auto; padding: 1.5rem 1.25rem 4rem; }
+  header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 1rem; }
+  .brand { font: 600 1.05rem/1.2 Georgia, "Times New Roman", serif; letter-spacing: 0.01em; }
+  nav a { margin-left: 1rem; font-size: 0.95rem; color: var(--ink); text-underline-offset: 0.2em; }
+  .stage { display: flex; justify-content: center; padding: 2.5rem 0 1.5rem; }
+  .nono { width: 9.5rem; height: 9.5rem; transform-origin: 50% 100%; animation: breathe 3.6s ease-in-out infinite; }
+  .nono .lid { transform-origin: 50% 44%; animation: blink 5.2s linear infinite; }
+  @keyframes breathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.025, 0.975); } }
+  @keyframes blink { 0%, 46%, 50%, 100% { transform: scaleY(1); } 48% { transform: scaleY(0.08); } }
+  @media (prefers-reduced-motion: reduce) { .nono, .nono .lid { animation: none; } }
+  h1 { font: 600 2.6rem/1.08 Georgia, "Times New Roman", serif; margin: 0 0 0.6rem; text-align: center; letter-spacing: -0.01em; }
+  .lead { text-align: center; font-size: 1.15rem; margin: 0 auto 1.6rem; max-width: 30rem; }
+  p { margin: 0 0 1rem; }
+  .pill { display: flex; justify-content: center; margin: 0 0 2.4rem; }
+  .pill span { display: inline-block; border: 1.5px solid var(--ink); border-radius: 999px; padding: 0.7rem 1.4rem; font-weight: 600; }
+  ul.facts { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  ul.facts li { border: 1.5px solid var(--line); border-radius: 18px; padding: 0.85rem 1rem; font-size: 0.98rem; line-height: 1.4; }
+  ul.facts b { display: block; font: 600 1.05rem/1.3 Georgia, "Times New Roman", serif; margin-bottom: 0.15rem; }
+  @media (max-width: 30rem) { ul.facts { grid-template-columns: 1fr; } h1 { font-size: 2.2rem; } }
+  footer { border-top: 1px solid var(--line); margin-top: 3rem; padding-top: 1.25rem; color: var(--quiet); font-size: 0.9rem; }
+  footer a { color: inherit; text-underline-offset: 0.2em; }
+  footer p { margin: 0 0 0.4rem; }
+  /* Sprache: Deutsch steht da, Englisch erscheint ueber den Anker #en (geht auch ohne Skript). */
+  #en { display: none; }
+  #en:target { display: block; }
+  #en:target + #de { display: none; }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="brand">Nonsensor</div>
+  <nav aria-label="Sprache / Language"><a href="#de" lang="de">Deutsch</a><a href="#en" lang="en">English</a></nav>
+</header>
+
+<div class="stage" aria-hidden="true">
+  <svg class="nono" viewBox="0 0 200 200" role="img">
+    <circle cx="100" cy="100" r="92" fill="#FF6B5E" stroke="var(--ink)" stroke-width="5"/>
+    <g class="lid">
+      <ellipse cx="68.7" cy="87" rx="19.3" ry="26.7" fill="#F4EFE6"/>
+      <ellipse cx="131.3" cy="87" rx="19.3" ry="26.7" fill="#F4EFE6"/>
+      <ellipse cx="72" cy="90" rx="9.7" ry="12" fill="#0E1016"/>
+      <ellipse cx="134.6" cy="90" rx="9.7" ry="12" fill="#0E1016"/>
+    </g>
+  </svg>
+</div>
+
+<section id="en" lang="en">
+  <h1>Your phone is the puzzle.</h1>
+  <p class="lead">Nonsensor is a puzzle game for Android. One screen per level, no instructions, and the title is the only hint.</p>
+  <div class="pill"><span>Coming soon to Google Play</span></div>
+  <p>Tilt it. Charge it. Make it dark. Turn the volume all the way down. Nonsensor turns everything your phone can sense into a puzzle, and Nono, a bouncy ball with two eyes, watches how you do it.</p>
+  <p>Most levels have up to three solutions. One of them always works with a finger alone, so nobody gets stuck because of a missing sensor.</p>
+  <ul class="facts">
+    <li><b>More than 150 levels</b>Ten worlds, from fingertips to flight mode.</li>
+    <li><b>Up to three solutions</b>Find one, or come back for all of them.</li>
+    <li><b>A daily puzzle</b>One level a day, the same for everyone.</li>
+    <li><b>Twelve languages</b>No account and no permission to confirm.</li>
+  </ul>
+</section>
+
+<section id="de" lang="de">
+  <h1>Dein Handy ist das Rätsel.</h1>
+  <p class="lead">Nonsensor ist ein Rätselspiel für Android. Ein Bildschirm je Level, keine Anleitung, und der Titel ist der einzige Hinweis.</p>
+  <div class="pill"><span>Bald bei Google Play</span></div>
+  <p>Kipp es. Lade es. Mach es dunkel. Dreh die Lautstärke ganz herunter. Nonsensor macht aus allem, was dein Handy spürt, ein Rätsel, und Nono, ein Flummi mit zwei Augen, sieht dir dabei zu.</p>
+  <p>Die meisten Level haben bis zu drei Lösungen. Eine davon geht immer nur mit dem Finger: Niemand bleibt hängen, weil ein Sensor fehlt.</p>
+  <ul class="facts">
+    <li><b>Über 150 Level</b>Zehn Welten, von Fingerspitzen bis Flugmodus.</li>
+    <li><b>Bis zu drei Lösungen</b>Finde eine, oder komm für alle wieder.</li>
+    <li><b>Ein Tagesrätsel</b>Jeden Tag ein Level, für alle dasselbe.</li>
+    <li><b>Zwölf Sprachen</b>Kein Konto, keine Berechtigung zum Bestätigen.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><a href="https://funnybuddys.github.io/nonsensor-privacy/">Datenschutz / Privacy</a> · <a href="https://funnybuddys.github.io/nonsensor-privacy/delete.html">Daten löschen / Delete data</a> · <a href="mailto:support@seismicdrop.com">support@seismicdrop.com</a></p>
+  <p>Diese Seite setzt keine Cookies und lädt nichts von fremden Servern. This page sets no cookies and loads nothing from other servers.</p>
+</footer>
+</main>
+<script>
+  // Ohne Anker: Englisch fuer alle, deren Browser nicht auf Deutsch steht.
+  if (!location.hash && !/^de\b/i.test(navigator.language || '')) location.replace('#en');
+</script>
+</body>
+</html>
